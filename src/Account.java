@@ -5,7 +5,8 @@ abstract public class Account {
     accountProvider provider;
 
     public boolean OTP() {
-
+        System.out.println("Hi");
+        return true;
     }
 
     public static Account signIn() {
