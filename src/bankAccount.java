@@ -3,7 +3,8 @@ import java.util.ArrayList;
 public class bankAccount extends Account {
     ArrayList<bankAccount> accounts;
 
-    bankAccount(String username ,){
+    bankAccount(String username){
+        System.out.println("mariam");
     }
     public void addAccount(bankAccount account)
     {
