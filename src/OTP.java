@@ -8,7 +8,7 @@ public class OTP {
         Scanner scanner=new Scanner(System.in);
         int num= scanner.nextInt();
         if(num==random){
-            return true;
+            return  true;
         }
          return false;
     }
