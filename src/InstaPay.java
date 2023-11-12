@@ -22,7 +22,7 @@ public class InstaPay {
                 String bankNum = new Scanner(System.in).nextLine();
                 account=new Account();
                 account.setProvider(new bankProvider (bankNum,mobileNum);
-                account.getProvider().verify();
+                account.getProvider().verify() ;
         }
     }
     public Boolean transfer( String type){
