@@ -1,7 +1,7 @@
 public class WalletProvider implements AccountProvider {
     String mobile;
     float balance;
-    WalletProvider(String mobile){
+    WalletProvider(String mobile) {
         this.mobile = mobile;
     }
     WalletProvider(String mobile, float balance){
@@ -14,7 +14,7 @@ public class WalletProvider implements AccountProvider {
     public float getBalance(){
         return balance;
     }
-    public boolean verify(){
+    public boolean verify() {
         return WalletDB.check(this);
     }
     public void setBalance(float bal) {
