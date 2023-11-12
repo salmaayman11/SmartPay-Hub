@@ -5,11 +5,12 @@ abstract public class Account {
     accountProvider provider;
 
     public boolean OTP() {
-        System.out.println("Hi");
+        System.out.println("main");
         return true;
     }
 
     public static Account signIn() {
+        return null;
     }
 
     public void signUp() {
