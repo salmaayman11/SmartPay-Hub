@@ -10,6 +10,7 @@ abstract public class Account {
     }
 
     public static Account signIn() {
+        return null;
     }
 
     public void signUp() {
