@@ -10,6 +10,6 @@ public class OTP {
         if(num==random){
             return true;
         }
-        return false;
+         return false;
     }
 }
