@@ -5,7 +5,6 @@ public class InstaPay {
     Transfer transferStrategy;
     Account account;
     public void signUp() {
-
     }
     public Boolean transfer( String type){
         return null;
