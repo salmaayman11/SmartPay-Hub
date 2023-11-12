@@ -12,7 +12,7 @@ public class BankDB {
             new BankProvider("9632548", "01024825873", 2.11F),
             new BankProvider("0606609", "01270856665", 0)
     ));
-    public boolean check(BankProvider inputBank) {
+    public static boolean check(BankProvider inputBank) {
         for (BankProvider bank : banks) {
             if(bank.getAccountNum() == inputBank.getAccountNum() && bank.getMobile() == inputBank.getMobile()) {
                 inputBank = bank;
