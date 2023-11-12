@@ -5,40 +5,22 @@ public class InstaPay {
     Transfer transferStrategy;
     Account account;
     public void signUp() {
-        System.out.println("1. Bank account\n2. Wallet Account\nEnter option number");
-        Scanner scanner = new Scanner(System.in);
-        String opt = scanner.nextLine();
-        System.out.println("Enter mobile number");
-        String mobileNum = new Scanner(System.in).nextLine();
 
-        switch (opt) {
-            case "1":
-                account = new Account();
-                account.setProvider(new walletProvider(mobileNum));
-                account.getProvider().verify();
-                break;
-            case "2":
-                System.out.println("Enter your account number");
-                String bankNum = new Scanner(System.in).nextLine();
-                account=new Account();
-                account.setProvider(new bankProvider (bankNum,mobileNum);
-                account.getProvider().verify() ;
-        }
     }
     public Boolean transfer( String type){
         return null;
     }
     public String getMobile(){
-
+        return "";
     }
     public float getBalance(){
-
+        return 0F;
     }
     public Boolean verify(){
-
+        return true;
     }
     public Boolean payBill(String Type){
-
+        return true;
     }
 
     public void signIn(String username,String pass){

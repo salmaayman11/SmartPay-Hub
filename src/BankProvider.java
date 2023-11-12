@@ -22,5 +22,6 @@ public class BankProvider implements AccountProvider {
         this.balance = bal;
     }
     public boolean verify(){
+        return true;
     }
 }
