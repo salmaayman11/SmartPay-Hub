@@ -9,6 +9,7 @@ public class Account {
         this.username=username;
         this.password=password;
     }
+    //System.out.println("the bill of " + bill.getType() + bill.getAmount());
 
 
     public static Account signIn() {
