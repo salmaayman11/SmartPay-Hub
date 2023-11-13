@@ -21,7 +21,7 @@ public class InstaPay {
 
             return transferStrategy.transfer(accno,amount);
         }
-        else if(type.equalsIgnoreCase("instapay account")){
+        else if(type.equalsIgnoreCase ("instapay account")){
             System.out.println("enter your username");
             String user=new Scanner(System.in).nextLine();
             float amount =new Scanner(System.in).nextFloat();
@@ -41,18 +41,18 @@ public class InstaPay {
     public float getBalance(){
         return account.provider.getBalance();
     }
-    public Boolean Bill(String Type) {
+    public void Bill(String Type) {
         if (Type.equalsIgnoreCase("water") || Type.equalsIgnoreCase("electricity") || Type.equalsIgnoreCase("gas")) {
             System.out.println("1. Inquire - 2.Pay bill");
             int option = new Scanner(System.in).nextInt();
             if (option == 1) {
-                if (Type.equalsIgnoreCase( "Water")) {
+                if (Type.equalsIgnoreCase("Water")) {
                     bill = new Water();
                 }
-                if (Type.equalsIgnoreCase( "Electricity")) {
+                if (Type.equalsIgnoreCase("Electricity")) {
                     bill = new Electricity();
                 }
-                if (Type.equalsIgnoreCase( "Gas")) {
+                if (Type.equalsIgnoreCase("Gas")) {
                     bill = new Gas();
                 }
                 System.out.println("Name: " + account.username);
@@ -60,19 +60,15 @@ public class InstaPay {
                 System.out.println("Do you want to pay bills y/n");
                 String choice = new Scanner(System.in).nextLine();
                 if (choice.equalsIgnoreCase("Y")) {
-                    return bill.pay(account.provider);
-
-                } else
-                    return false;
+                    bill.pay(account.provider);
+                }
             }
 
             if (option == 2) {
-                return bill.pay(account.provider);
+                 bill.pay(account.provider);
             }
             System.out.println("You entered wrong option");
-            return false;
         }
-        return false;
     }
 
 
