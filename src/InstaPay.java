@@ -5,6 +5,7 @@ public class InstaPay {
     Transfer transferStrategy;
     Account account;
     public void signUp() {
+        account.signUp();
     }
     public Boolean transfer( String type){
         return null;
@@ -18,7 +19,7 @@ public class InstaPay {
     public Boolean verify(){
         return true;
     }
-    public Boolean payBill(String Type){
+    public Boolean Bill(String Type){
         return true;
     }
 
