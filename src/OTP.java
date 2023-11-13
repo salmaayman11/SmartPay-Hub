@@ -4,7 +4,7 @@ import java.util.Random;
 public class OTP {
     public static Boolean generateOTP(){
         Random random = new Random();
-        int randomNum = random.nextInt();
+        int randomNum = random.nextInt(99999 - 100 + 1) + 100;
         System.out.println(randomNum);
         System.out.println("Enter the num");
         Scanner scanner=new Scanner(System.in);
