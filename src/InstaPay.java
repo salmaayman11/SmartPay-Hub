@@ -56,7 +56,7 @@ public class InstaPay {
                     bill = new Gas();
                 }
                 System.out.println("Name: " + account.username);
-                System.out.println("the bill of " + bill.getType() + bill.getAmount());
+                bill.printBill();
                 System.out.println("Do you want to pay bills y/n");
                 String choice = new Scanner(System.in).nextLine();
                 if (choice.equalsIgnoreCase("Y")) {
