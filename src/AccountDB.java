@@ -38,5 +38,12 @@ public class AccountDB {
         return false;
     }
 
-
+    public static Account getAccount(String inputUsername) {
+        for (Account acc : accounts) {
+            if(acc.username == inputUsername) {
+                return acc;
+            }
+        }
+        return null;
+    }
 }
