@@ -48,7 +48,7 @@ public class Account {
             password=new Scanner(System.in).nextLine();
             }
         Account account=new Account(username,password);
-        while(AccountDB.check(username)==null) {
+        while(AccountDB.check(username)==false) {
             System.out.println("Enter a unique username");
             username=new Scanner(System.in).nextLine();
         }
