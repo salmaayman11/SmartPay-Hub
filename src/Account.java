@@ -18,15 +18,10 @@ public class Account {
         String password = new Scanner(System.in).nextLine();
         Account account=new Account(username,password);
         if (AccountDB.check(account)) {
-            if (Objects.equals(account.password, password)) {
-                System.out.println("Signed in");
                 return account;
-            }
         }
         return null;
     }
-
-
     public void signUp() {
         System.out.println("1. Bank account\n2. Wallet Account\nEnter option number");
         Scanner scanner = new Scanner(System.in);

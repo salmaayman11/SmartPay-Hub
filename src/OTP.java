@@ -1,13 +1,15 @@
 import java.util.Scanner;
+import java.util.Random;
 
 public class OTP {
     public static Boolean generateOTP(){
-        int random= (int) Math.random();
-        System.out.println(random);
+        Random random = new Random();
+        int randomNum = random.nextInt();
+        System.out.println(randomNum);
         System.out.println("Enter the num");
         Scanner scanner=new Scanner(System.in);
         int num= scanner.nextInt();
-        if(num==random){
+        if(num==randomNum){
             return  true;
         }
          return false;
