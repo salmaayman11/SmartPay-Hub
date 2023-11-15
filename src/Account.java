@@ -5,6 +5,8 @@ public class Account {
     String username;
     String password;
     AccountProvider provider;
+
+    Account(){}
     Account(String username,String password) {
         this.username=username;
         this.password=password;
@@ -18,13 +20,13 @@ public class Account {
         System.out.println("Enter your password");
         String password = new Scanner(System.in).nextLine();
         Account account=new Account(username,password);
-        if (AccountDB.check(account)) {
+        if (account.verify()) {
             return account;
         }
         return null;
     }
     public void signUp() {
-        System.out.println("1. Bank account\n2. Wallet Account\nEnter option number");
+        System.out.println("1. Wallet account\n2. Bank Account\nEnter option number");
         Scanner scanner = new Scanner(System.in);
         String opt = scanner.nextLine();
         System.out.println("Enter mobile number");
@@ -33,23 +35,29 @@ public class Account {
         switch (opt) {
             case "1":
                 setProvider(new WalletProvider(mobileNum));
-                getProvider().verify();
+                if(!getProvider().verify()) {
+                    System.out.println("Invalid mobile number");
+                    return;
+                }
                 break;
             case "2":
                 System.out.println("Enter your account number");
                 String bankNum = new Scanner(System.in).nextLine();
                 setProvider(new BankProvider (bankNum,mobileNum));
-                getProvider().verify() ;
-
+                if(!getProvider().verify()) {
+                    System.out.println("Invalid account or mobile number");
+                    return;
+                }
         }
-        if(OTP.generateOTP()){
-            System.out.println("Enter your username");
-            username=new Scanner(System.in).nextLine();
-            System.out.println("Enter your pass");
-            password=new Scanner(System.in).nextLine();
-            }
-        Account account=new Account(username,password);
-        while(AccountDB.check(username)==false) {
+        if(!OTP.generateOTP()){
+            System.out.println("OTP cannot be generated!");
+            return;
+        }
+        System.out.println("Enter your username");
+        username=new Scanner(System.in).nextLine();
+        System.out.println("Enter your pass");
+        password=new Scanner(System.in).nextLine();
+        while(AccountDB.check(username)) {
             System.out.println("Enter a unique username");
             username=new Scanner(System.in).nextLine();
         }
@@ -57,14 +65,20 @@ public class Account {
             System.out.println("Enter another password ");
             password=new Scanner(System.in).nextLine();
         }
-        AccountDB.add(account);
-            }
+        AccountDB.add(this);
+    }
 
     public void setProvider(AccountProvider provider) {
         this.provider = provider;
     }
-
-
+    private boolean verify() {
+        Account acc = AccountDB.check(this);
+        if(acc == null) return false;
+        this.password = acc.password;
+        this.username = acc.getUserName();
+        this.provider = acc.getProvider();
+        return true;
+    }
     public AccountProvider getProvider(){
         return provider;
     }

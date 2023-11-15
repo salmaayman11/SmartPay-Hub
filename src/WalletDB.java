@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class WalletDB {
     static ArrayList<WalletProvider> wallets = new ArrayList<WalletProvider>(Arrays.asList(
@@ -11,13 +12,12 @@ public class WalletDB {
             new WalletProvider("01024825873", 2.11F),
             new WalletProvider("01270856665", 0)
     ));
-    public static boolean check(WalletProvider inputWallet) {
+    public static WalletProvider check(WalletProvider inputWallet) {
         for (WalletProvider wallet : wallets) {
-            if(wallet.getMobile() == inputWallet.getMobile()) {
-                inputWallet = wallet;
-                return true;
+            if(Objects.equals(wallet.getMobile(), inputWallet.getMobile())) {
+                return wallet;
             }
         }
-        return false;
+        return null;
     }
 }

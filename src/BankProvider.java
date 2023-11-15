@@ -22,6 +22,11 @@ public class BankProvider implements AccountProvider {
         this.balance = bal;
     }
     public boolean verify(){
-        return BankDB.check(this);
+        BankProvider b = BankDB.check(this);
+        if (b == null) return false;
+        this.mobile = b.getMobile();
+        this.balance = b.getBalance();
+        this.accountNum = b.getAccountNum();
+        return true;
     }
 }

@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Objects;
 
 public class BankDB {
     static ArrayList<BankProvider> banks = new ArrayList<BankProvider>(Arrays.asList(
@@ -12,13 +13,12 @@ public class BankDB {
             new BankProvider("9632548", "01024825873", 2.11F),
             new BankProvider("0606609", "01270856665", 0)
     ));
-    public static boolean check(BankProvider inputBank) {
+    public static BankProvider check(BankProvider inputBank) {
         for (BankProvider bank : banks) {
-            if(bank.getAccountNum() == inputBank.getAccountNum() && bank.getMobile() == inputBank.getMobile()) {
-                inputBank = bank;
-                return true;
+            if(Objects.equals(bank.getAccountNum(), inputBank.getAccountNum()) && Objects.equals(bank.getMobile(), inputBank.getMobile())) {
+                return bank;
             }
         }
-        return false;
+        return null;
     }
 }

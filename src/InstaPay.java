@@ -5,11 +5,12 @@ public class InstaPay {
     UtilityBill bill;
     Transfer transferStrategy;
     Account account;
-    public void signUp() {
-        account.signUp();
+    public String getUsername() {
+        return account.getUserName();
     }
     public Boolean transfer(String type){
-        if(type.equalsIgnoreCase("bank")){
+//        Bank
+        if(type.equalsIgnoreCase("1")){
             if (!(account.getProvider() instanceof BankProvider)) {
                 System.out.println("You cannot transfer to bank account");
                 return false;
@@ -21,18 +22,21 @@ public class InstaPay {
 
             return transferStrategy.transfer(accno,amount);
         }
-        else if(type.equalsIgnoreCase ("instapay account")){
+//        Instapay
+        else if(type.equalsIgnoreCase ("2")){
             System.out.println("enter your username");
             String user=new Scanner(System.in).nextLine();
+            System.out.println("Enter amount to be transferred");
             float amount =new Scanner(System.in).nextFloat();
             return transferStrategy.transfer(user,amount);
         }
-        else if(type.equalsIgnoreCase("wallet")){
+//        Wallet
+        else if(type.equalsIgnoreCase("3")){
             System.out.println("enter your Mobile number");
             String mobile=new Scanner(System.in).nextLine();
             float amount =new Scanner(System.in).nextFloat();
             return transferStrategy.transfer(mobile,amount);
-        }
+        } else System.out.println("Undefined type");
         return false;
     }
     public String getMobile(){
@@ -43,7 +47,7 @@ public class InstaPay {
     }
     public void Bill(String Type) {
         if (Type.equalsIgnoreCase("water") || Type.equalsIgnoreCase("electricity") || Type.equalsIgnoreCase("gas")) {
-            System.out.println("1. Inquire - 2.Pay bill");
+            System.out.println("1. Inquire - 2. Pay bill");
             int option = new Scanner(System.in).nextInt();
             if (option == 1) {
                 if (Type.equalsIgnoreCase("Water")) {
@@ -70,14 +74,18 @@ public class InstaPay {
             System.out.println("You entered wrong option");
         }
     }
-
-
-    public void signIn(String username,String pass){
-        Account.signIn();
-
+    public void signIn(){
+        this.account = Account.signIn();
+        if(account == null) System.out.println("Account not found!");
     }
-    public void singUp() {
+    public void signUp() {
+        account = new Account();
         account.signUp();
-
+    }
+    public boolean auth() {
+        return account != null;
+    }
+    public AccountProvider getProvider() {
+        return account.getProvider();
     }
 }

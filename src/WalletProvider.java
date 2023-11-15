@@ -15,7 +15,11 @@ public class WalletProvider implements AccountProvider {
         return balance;
     }
     public boolean verify() {
-        return WalletDB.check(this);
+        WalletProvider w = WalletDB.check(this);
+        if(w == null) return false;
+        this.mobile = w.getMobile();
+        this.balance = w.getBalance();
+        return true;
     }
     public void setBalance(float bal) {
         this.balance = bal;

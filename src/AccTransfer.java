@@ -1,6 +1,6 @@
 public class AccTransfer implements Transfer {
 
-    String mobile ;
+    String mobile;
     AccountDB accountDB;
     AccountProvider accProvider;
     public AccTransfer(String mobile, AccountDB accountDB,AccountProvider accProvider ){

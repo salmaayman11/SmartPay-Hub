@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class AccountDB {
     //ArrayList<Account> accounts;
@@ -14,24 +15,24 @@ public class AccountDB {
             new Account("Harry_70", "R@nd0mP@ss!")
     ));
 
-    public static boolean check(Account inputAccount) {
+    public static Account check(Account inputAccount) {
         for (Account acc : accounts) {
-            if(acc.username == inputAccount.username && acc.password==inputAccount.password) {
-                return true;
+            if(Objects.equals(acc.username, inputAccount.username) && Objects.equals(acc.password, inputAccount.password)) {
+                return acc;
             }
         }
-        return false;
+        return null;
     }
     public static boolean check(String inputUsername) {
         for (Account acc : accounts) {
-            if(acc.username == inputUsername) {
+            if(Objects.equals(acc.username, inputUsername)) {
                 return true;
             }
         }
         return false;
     }
     public static boolean add(Account acc){
-        if(!check(acc)){
+        if(check(acc) == null){
             accounts.add(acc);
             return true;
         }
@@ -40,7 +41,7 @@ public class AccountDB {
 
     public static Account getAccount(String inputUsername) {
         for (Account acc : accounts) {
-            if(acc.username == inputUsername) {
+            if(Objects.equals(acc.username, inputUsername)) {
                 return acc;
             }
         }
