@@ -1,3 +1,5 @@
+package AccountProvider;
+
 public class BankProvider implements AccountProvider {
     private String mobile;
     private float balance;

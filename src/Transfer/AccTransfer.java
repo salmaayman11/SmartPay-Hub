@@ -1,20 +1,26 @@
+package Transfer;
+
+import Account.*;
+import AccountProvider.*;
+
+import java.util.Scanner;
+
 public class AccTransfer implements Transfer {
 
-    String mobile;
-    AccountDB accountDB;
     AccountProvider senderAccProvider;
-    public AccTransfer(String mobile, AccountDB accountDB,AccountProvider senderAccProvider ){
-        this.mobile=mobile;
-        this.accountDB=accountDB;
-        this.senderAccProvider=senderAccProvider;
+
+    public AccTransfer(AccountProvider senderAccProvider) {
+        this.senderAccProvider = senderAccProvider;
     }
-    public Boolean transfer(String userName, float amount){
-        System.out.println("Transferring to InstaPay Account");
-        if (accountDB.check(userName)){
-            Account receiverAcc = accountDB.getAccount(userName); ;
+
+    public Boolean transfer(float amount){
+        System.out.println("Enter the username of the account you want to transfer to");
+        String userName=new Scanner((System.in)).nextLine();
+        if (AccountDB.check(userName)){
+            Account receiverAcc = AccountDB.getAccount(userName); ;
 
             if(senderAccProvider.getBalance()>=amount){
-                float senderUpdatedBalance =senderAccProvider.getBalance() - amount;
+                float senderUpdatedBalance = senderAccProvider.getBalance() - amount;
                 float receiverUpdatedBalance= senderAccProvider.getBalance() + amount;
                 senderAccProvider.setBalance(senderUpdatedBalance);
                 receiverAcc.getProvider().setBalance(receiverUpdatedBalance);

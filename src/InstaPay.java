@@ -1,4 +1,8 @@
-import java.util.Objects;
+import Account.*;
+import AccountProvider.*;
+import Transfer.*;
+import UtilityBill.*;
+
 import java.util.Scanner;
 
 public class InstaPay {
@@ -10,40 +14,26 @@ public class InstaPay {
     }
     public Boolean transfer(String type){
 //        Bank
+        System.out.println("Enter the amount you want to transfer");
+        float amount =new Scanner(System.in).nextFloat();
         if(type.equalsIgnoreCase("1")){
             if (!(account.getProvider() instanceof BankProvider)) {
                 System.out.println("You cannot transfer to bank account");
                 return false;
             }
-            System.out.println("enter the account number you want to transfer to");
-            String accno=new Scanner((System.in)).nextLine();
-            System.out.println("Enter the amount you want to transfer");
-            float amount =new Scanner(System.in).nextFloat();
-
-            return transferStrategy.transfer(accno,amount);
+            transferStrategy = new BankTransfer(account.getProvider());
         }
 //        Instapay
-        else if(type.equalsIgnoreCase ("2")){
-            System.out.println("enter your username");
-            String user=new Scanner(System.in).nextLine();
-            System.out.println("Enter amount to be transferred");
-            float amount =new Scanner(System.in).nextFloat();
-            return transferStrategy.transfer(user,amount);
-        }
+        else if(type.equalsIgnoreCase ("2"))
+            transferStrategy = new AccTransfer(account.getProvider());
 //        Wallet
-        else if(type.equalsIgnoreCase("3")){
-            System.out.println("enter your Mobile number");
-            String mobile=new Scanner(System.in).nextLine();
-            float amount =new Scanner(System.in).nextFloat();
-            return transferStrategy.transfer(mobile,amount);
-        } else System.out.println("Undefined type");
-        return false;
-    }
-    public String getMobile(){
-        return account.provider.getMobile();
+        else if(type.equalsIgnoreCase("3"))
+            transferStrategy = new WalletTransfer(account.getProvider());
+        else System.out.println("Undefined type");
+        return transferStrategy.transfer(amount);
     }
     public float getBalance(){
-        return account.provider.getBalance();
+        return account.getProvider().getBalance();
     }
     public void Bill(String Type) {
         if (Type.equalsIgnoreCase("water") || Type.equalsIgnoreCase("electricity") || Type.equalsIgnoreCase("gas")) {
@@ -59,19 +49,17 @@ public class InstaPay {
                 if (Type.equalsIgnoreCase("Gas")) {
                     bill = new Gas();
                 }
-                System.out.println("Name: " + account.username);
+                System.out.println("Name: " + account.getUserName());
                 bill.printBill();
                 System.out.println("Do you want to pay bills y/n");
                 String choice = new Scanner(System.in).nextLine();
-                if (choice.equalsIgnoreCase("Y")) {
-                    bill.pay(account.provider);
+                if (choice.equalsIgnoreCase("y")) {
+                    bill.pay(account.getProvider());
                 }
             }
-
             if (option == 2) {
-                 bill.pay(account.provider);
+                 bill.pay(account.getProvider());
             }
-            System.out.println("You entered wrong option");
         }
     }
     public void signIn(){

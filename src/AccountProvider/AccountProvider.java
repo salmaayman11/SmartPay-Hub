@@ -1,3 +1,5 @@
+package AccountProvider;
+
 public interface AccountProvider {
     public String getMobile();
     public float getBalance();

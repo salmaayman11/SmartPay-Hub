@@ -1,4 +1,7 @@
-import java.util.Objects;
+package Account;
+
+import AccountProvider.*;
+
 import java.util.Scanner;
 
 public class Account {
@@ -6,7 +9,7 @@ public class Account {
     String password;
     AccountProvider provider;
 
-    Account(){}
+    public Account(){}
     Account(String username,String password) {
         this.username=username;
         this.password=password;
@@ -43,14 +46,14 @@ public class Account {
             case "2":
                 System.out.println("Enter your account number");
                 String bankNum = new Scanner(System.in).nextLine();
-                setProvider(new BankProvider (bankNum,mobileNum));
+                setProvider(new BankProvider(bankNum,mobileNum));
                 if(!getProvider().verify()) {
                     System.out.println("Invalid account or mobile number");
                     return;
                 }
         }
         if(!OTP.generateOTP()){
-            System.out.println("OTP cannot be generated!");
+            System.out.println("Account.OTP cannot be generated!");
             return;
         }
         System.out.println("Enter your username");

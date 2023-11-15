@@ -1,19 +1,25 @@
-public class BankTransfer implements Transfer {
-    String mobile ;
-    BankProvider senderBankProvider;
-    AccountDB accountDB;
-    BankDB bankDB;
-    public BankTransfer(String mobile,BankProvider senderBankProvider,AccountDB accountDB, BankDB bankDB){
-        this.mobile = mobile;
-        this.senderBankProvider = senderBankProvider;
-        this.accountDB = accountDB;
-        this.bankDB = bankDB;
-    }
-    public Boolean transfer(String receiverAccountNo, float amount){
-        System.out.println("Transferring to bank account");
-        BankProvider receiverAcc =  new BankProvider(receiverAccountNo);
-        if (bankDB.check(receiverAcc)){
+package Transfer;
 
+import Account.AccountDB;
+import AccountProvider.AccountProvider;
+import AccountProvider.BankDB;
+import AccountProvider.BankProvider;
+
+import java.util.Scanner;
+
+public class BankTransfer implements Transfer {
+    AccountProvider senderBankProvider;
+
+    public BankTransfer(AccountProvider senderBankProvider) {
+        this.senderBankProvider = senderBankProvider;
+    }
+
+    public Boolean transfer(float amount){
+        System.out.println("Enter receiver bank account number");
+        Scanner scanner = new Scanner(System.in);
+        String receiverAccountNo = scanner.nextLine();
+        BankProvider receiverAcc = BankDB.check(receiverAccountNo);
+        if (receiverAcc != null){
             if(senderBankProvider.getBalance()>=amount){
                 float senderUpdatedBalance = senderBankProvider.getBalance()-amount;
                 float receiverUpdatedBalance= receiverAcc.getBalance()+amount;
@@ -21,7 +27,7 @@ public class BankTransfer implements Transfer {
                 senderBankProvider.setBalance(senderUpdatedBalance);
                 receiverAcc.setBalance(receiverUpdatedBalance);
 
-                System.out.println("Successful Transfer");
+                System.out.println("Successful Transfer.Transfer");
                 return true;
             }
             else{

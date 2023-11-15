@@ -1,7 +1,9 @@
+package AccountProvider;
+
 public class WalletProvider implements AccountProvider {
     String mobile;
     float balance;
-    WalletProvider(String mobile) {
+    public WalletProvider(String mobile) {
         this.mobile = mobile;
     }
     WalletProvider(String mobile, float balance){

@@ -1,8 +1,12 @@
+package UtilityBill;
+
 import java.lang.Math;
+import java.util.Random;
+
 public class Electricity extends UtilityBill {
-    float amount;
     public Electricity(){
-        this.amount= (float) Math.random()*(1000-200+1)+200;
+        Random random = new Random();
+        this.amount = 50 + random.nextFloat() * (1000 - 50);
     }
 
     public String getType(){

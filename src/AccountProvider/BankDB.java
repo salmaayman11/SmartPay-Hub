@@ -1,6 +1,7 @@
+package AccountProvider;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.Objects;
 
 public class BankDB {
@@ -16,6 +17,14 @@ public class BankDB {
     public static BankProvider check(BankProvider inputBank) {
         for (BankProvider bank : banks) {
             if(Objects.equals(bank.getAccountNum(), inputBank.getAccountNum()) && Objects.equals(bank.getMobile(), inputBank.getMobile())) {
+                return bank;
+            }
+        }
+        return null;
+    }
+    public static BankProvider check(String accNum) {
+        for (BankProvider bank : banks) {
+            if(Objects.equals(bank.getAccountNum(), accNum)) {
                 return bank;
             }
         }

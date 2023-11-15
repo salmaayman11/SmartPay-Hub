@@ -1,10 +1,11 @@
+package Account;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
 public class AccountDB {
-    //ArrayList<Account> accounts;
+    //ArrayList<Account.Account> accounts;
     static ArrayList<Account> accounts = new ArrayList<Account>(Arrays.asList(
             new Account("Tony_70", "S3cur3P@ss"),
             new Account("Sony_10", "P@ssw0rd1"),

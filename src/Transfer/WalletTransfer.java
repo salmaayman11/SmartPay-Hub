@@ -1,14 +1,22 @@
+package Transfer;
+
+import AccountProvider.*;
+
+import java.util.Scanner;
+
 public class WalletTransfer implements Transfer{
-    String mobile ;
-    WalletProvider senderWalletProvider;
-    public WalletTransfer(String mobile, WalletProvider senderWalletProvider ) {
-        this.mobile = mobile;
+    AccountProvider senderWalletProvider;
+
+    public WalletTransfer(AccountProvider senderWalletProvider) {
         this.senderWalletProvider = senderWalletProvider;
     }
-    public Boolean transfer(String receiverMobileNo, float amount){
-        System.out.println("Transferring to bank account");
-        WalletProvider receiverWallet = new WalletProvider(receiverMobileNo);
-        if (walletDB.check(receiverWallet)){
+
+    public Boolean transfer(float amount){
+        System.out.println("Enter receiver wallet mobile number");
+        Scanner scanner = new Scanner(System.in);
+        String receiverMobileNo = scanner.nextLine();
+        WalletProvider receiverWallet = WalletDB.check(new WalletProvider(receiverMobileNo));
+        if (receiverWallet != null){
             if(senderWalletProvider.getBalance()>=amount){
                 float senderUpdatedBalance = senderWalletProvider.getBalance()-amount;
                 float receiverUpdatedBalance= receiverWallet.getBalance()+amount;
@@ -23,7 +31,6 @@ public class WalletTransfer implements Transfer{
                 return false;
             }
            }else{
-
             System.out.println("Invalid Wallet Mobile Number");
             return false;
         }

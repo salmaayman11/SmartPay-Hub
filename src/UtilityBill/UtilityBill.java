@@ -1,3 +1,7 @@
+package UtilityBill;
+
+import AccountProvider.AccountProvider;
+
 public abstract class UtilityBill {
     float amount;
     public void pay(AccountProvider account) {
