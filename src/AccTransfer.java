@@ -2,27 +2,27 @@ public class AccTransfer implements Transfer {
 
     String mobile ;
     AccountDB accountDB;
-    AccountProvider accProvider;
-    public AccTransfer(String mobile, AccountDB accountDB,AccountProvider accProvider ){
+    AccountProvider senderAccProvider;
+    public AccTransfer(String mobile, AccountDB accountDB,AccountProvider senderAccProvider ){
         this.mobile=mobile;
         this.accountDB=accountDB;
-        this.accProvider=accProvider;
+        this.senderAccProvider=senderAccProvider;
     }
     public Boolean transfer(String userName, float amount){
-        System.out.println("Transferring to Instapay account");
+        System.out.println("Transferring to InstaPay Account");
         if (accountDB.check(userName)){
             Account receiverAcc = accountDB.getAccount(userName); ;
 
-            if(accProvider.getBalance()>=amount){
-                float senderUpdatedBalance =accProvider.getBalance()-amount;
-                float receiverUpdatedBalance= accProvider.getBalance()+amount;
-                accProvider.setBalance(senderUpdatedBalance);
-                receiverAcc.provider.setBalance(receiverUpdatedBalance);
+            if(senderAccProvider.getBalance()>=amount){
+                float senderUpdatedBalance =senderAccProvider.getBalance() - amount;
+                float receiverUpdatedBalance= senderAccProvider.getBalance() + amount;
+                senderAccProvider.setBalance(senderUpdatedBalance);
+                receiverAcc.getProvider().setBalance(receiverUpdatedBalance);
                 System.out.println("Successful Transfer");
                 return true;
             }
             else{
-                System.out.println("Insufficient balance.");
+                System.out.println("Insufficient Balance.");
                 return false;
             }
         }else{
